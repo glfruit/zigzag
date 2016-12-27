@@ -1,0 +1,10 @@
+{% block content %}
+<form enctype="multipart/form-data" action="{{ url_for('upload') }}">
+  <div>
+    <input type='file' name='file' />
+  </div>
+  <div>
+    <input type='submit' value='upload' />
+  </div>
+</form>
+{% endblock %}
