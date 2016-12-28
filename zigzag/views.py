@@ -3,12 +3,20 @@ import os
 from flask import request, render_template, redirect, url_for, flash
 
 from flask_uploads import UploadSet
+from flask_babel import Babel, gettext
 
 from werkzeug import secure_filename
 
 from zigzag import app
 
 swf_files = UploadSet('swfFiles')
+
+
+babel = Babel(app)
+@babel.localeselector
+def get_locale():
+    translations = [str(translation) for translation in babel.list_translations()]
+    return request.accept_languages.best_match(translations)
 
 @app.route('/')
 def index():
