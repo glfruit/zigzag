@@ -1,4 +1,4 @@
-
+# coding=utf-8
 ## TODO: 加入开发时和发布时的不同配置
 from zigzag import app
 
