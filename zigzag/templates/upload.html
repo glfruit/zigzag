@@ -1,11 +1,10 @@
-{% extends "bootstrap/base.html" %}
-{% block content %}
-<form method='POST' enctype="multipart/form-data" action="{{ url_for('upload') }}" multiple="multiple">
-  <div>
-    <input type='file' name='file' />
-  </div>
-  <div>
-    <input type='submit' value="{{ _('upload') }}" />
-  </div>
+{% extends "bootstrap/base.html" %} {% block content %}
+<form method='POST' enctype="multipart/form-data" action="{{ url_for('upload') }}">
+    <div>
+        <input type='file' name='file' multiple/>
+    </div>
+    <div>
+        <input type='submit' value="{{ _('upload') }}" />
+    </div>
 </form>
 {% endblock %}
