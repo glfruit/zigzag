@@ -1,6 +1,8 @@
 # coding=utf-8
-## TODO: 加入开发时和发布时的不同配置
+#FIXME: 加入开发时和发布时的不同配置
 from zigzag import app
+
+TEMPLATES_AUTO_RELOAD = True
 
 #
 WTF_CSRF_ENABLED = True

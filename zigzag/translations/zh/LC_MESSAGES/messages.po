@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2016-12-28 16:45+0800\n"
+"POT-Creation-Date: 2016-12-29 16:31+0800\n"
 "PO-Revision-Date: 2016-12-28 16:46+0800\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: zh\n"
@@ -18,7 +18,27 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.3.4\n"
 
-#: zigzag/templates/upload.html:8
+#: zigzag/forms.py:9
+msgid "Passwords must match"
+msgstr "两次输入的密码必须相同"
+
+#: zigzag/templates/login.html:4 zigzag/templates/login.html:20
+msgid "Login"
+msgstr "登录"
+
+#: zigzag/templates/login.html:17
+msgid "Username"
+msgstr "用户名"
+
+#: zigzag/templates/login.html:18
+msgid "Password"
+msgstr "密码"
+
+#: zigzag/templates/login.html:19
+msgid "Confirm Password"
+msgstr "重复密码"
+
+#: zigzag/templates/upload.html:9
 msgid "upload"
 msgstr "上传"
 

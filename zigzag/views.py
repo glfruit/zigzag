@@ -3,16 +3,14 @@ import os
 from flask import request, render_template, redirect, url_for, flash
 
 from flask_uploads import UploadSet
-from flask_babel import Babel, gettext
 
 from werkzeug import secure_filename
 
-from zigzag import app
+from zigzag import app, babel
+from .forms import LoginForm
 
 swf_files = UploadSet('swfFiles')
 
-
-babel = Babel(app)
 @babel.localeselector
 def get_locale():
     translations = [str(translation) for translation in babel.list_translations()]
@@ -21,6 +19,14 @@ def get_locale():
 @app.route('/')
 def index():
 	return render_template("index.html")
+
+@app.route('/login', methods = ['GET', 'POST'])
+def login():
+	form = LoginForm()
+	if form.validate_on_submit():
+		# TODO: 实现登录功能
+		return redirect('/')
+	return render_template('login.html', form = form)
 
 @app.route('/upload', methods = ['GET', 'POST'])
 def upload():
