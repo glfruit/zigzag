@@ -37,3 +37,13 @@ def upload():
 		return redirect(url_for('upload'))
 
 	return render_template('upload.html')
+
+
+#NOTE: 来自http://flask.pocoo.org/snippets/12/，实现用flash存储表单错误信息的功能
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+            ))

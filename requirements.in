@@ -1,0 +1,13 @@
+# requirements.in
+flask
+flask-babel
+flask-bootstrap
+flask-login
+flask-sqlalchemy
+flask-uploads
+flask-wtf
+pillow
+qrcode
+colorama
+decorator
+pbr

@@ -2,6 +2,7 @@
 #FIXME: 加入开发时和发布时的不同配置
 from zigzag import app
 
+# 模板内容更改时自动加载
 TEMPLATES_AUTO_RELOAD = True
 
 #
