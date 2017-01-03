@@ -1,4 +1,9 @@
 # requirements.in
+# basic usage
+#   pip-compile requirements.in
+#   pip-sync
+# to upgrade all packages, run pip-compile --upgrade
+
 flask
 flask-babel
 flask-bootstrap
@@ -11,3 +16,4 @@ qrcode
 colorama
 decorator
 pbr
+sqlalchemy-migrate

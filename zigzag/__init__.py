@@ -4,8 +4,8 @@ from logging.handlers import TimedRotatingFileHandler
 
 from flask import Flask
 
+from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
-
 from flask_bootstrap import Bootstrap,WebCDN
 
 #FIXME: 根据http://www.cnblogs.com/txw1958/archive/2011/10/21/2220636.html重构日志初始化代码
@@ -22,6 +22,9 @@ console.setLevel(logging.INFO)
 formatter = logging.Formatter('%(asctime)s %(filename)s[line:%(lineno)d] %(levelname)s %(message)s')
 console.setFormatter(formatter)
 app.logger.addHandler(console)
+
+# database initialiation
+db = SQLAlchemy(app)
 
 # i18n
 babel = Babel(app)
