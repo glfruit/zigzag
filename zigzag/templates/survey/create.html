@@ -1,0 +1,16 @@
+{% extends "layout.html" %}
+
+{% block main %}
+  <div class="container">
+    <form action="" method="post" class="form-survey">
+      {{ form.hidden_tag() }}
+      <h2 class="form-survey-heading">{{ _('Survey') }}</h2>
+      <!--
+      TODO: 加入验证错误信息提示
+      -->
+      {{ form.title(class='input-block-level', placeholder = _('Title')) }}
+      {{ form.description(class='input-block-level', placeholder = _('Description')) }}
+      <button class="btn btn-primary" type="submit" value="{{ _('Save') }}" >{{ _('Survey') }}</button>
+    </form>
+  </div> <!-- /container -->
+{% endblock %}

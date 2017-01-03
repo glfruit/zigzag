@@ -7,39 +7,59 @@ from flask_uploads import UploadSet
 from werkzeug import secure_filename
 
 from zigzag import app, babel
-from .forms import LoginForm
+from .forms import LoginForm, SurveyForm
 
 swf_files = UploadSet('swfFiles')
 
+
 @babel.localeselector
 def get_locale():
-    translations = [str(translation) for translation in babel.list_translations()]
+    translations = [str(translation)
+                    for translation in babel.list_translations()]
     return request.accept_languages.best_match(translations)
+
 
 @app.route('/')
 def index():
-	return render_template("index.html")
+    return render_template("index.html")
 
-@app.route('/login', methods = ['GET', 'POST'])
+
+@app.route('/login', methods=['GET', 'POST'])
 def login():
-	form = LoginForm()
-	if form.validate_on_submit():
-		# TODO: 实现登录功能
-		return redirect('/')
-	return render_template('login.html', form = form)
+    form = LoginForm()
+    if form.validate_on_submit():
+        # TODO: 实现登录功能
+        return redirect('/')
+    return render_template('login.html', form=form)
 
-@app.route('/upload', methods = ['GET', 'POST'])
+
+@app.route('/upload', methods=['GET', 'POST'])
 def upload():
-	if request.method == 'POST' and 'file' in request.files:
-		file = request.files['file']
-		filename = secure_filename(file.filename)
-		file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
-		return redirect(url_for('upload'))
+    if request.method == 'POST' and 'file' in request.files:
+        file = request.files['file']
+        filename = secure_filename(file.filename)
+        file.save(os.path.join(app.config['UPLOAD_FOLDER'], filename))
+        return redirect(url_for('upload'))
 
-	return render_template('upload.html')
+    return render_template('upload.html')
 
 
-#NOTE: 来自http://flask.pocoo.org/snippets/12/，实现用flash存储表单错误信息的功能
+@app.route('/survey/create', methods=['GET', 'POST'])
+def survey_create():
+    form = SurveyForm()
+    if request.method == 'GET':
+        return render_template('survey/create.html', form=form)
+
+    if form.validate_on_submit():
+        return redirect(url_for('survey_list'))
+
+
+@app.route('/survey/list', methods=['GET'])
+def survey_list():
+    return render_template('survey/list.html')
+
+
+# NOTE: 来自http://flask.pocoo.org/snippets/12/，实现用flash存储表单错误信息的功能
 def flash_errors(form):
     for field, errors in form.errors.items():
         for error in errors:
