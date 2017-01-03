@@ -18,6 +18,9 @@ SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 # flask uploads config
 UPLOAD_FOLDER = app.instance_path
 
+# debug toolbar config
+DEBUG_TB_PROFILER_ENABLED = True
+
 # i18n config
 LANGUAGES = {
     'en': 'English',
