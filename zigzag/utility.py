@@ -2,10 +2,10 @@
 import codecs
 import os
 import errno
-from types import MethodType, ModuleType
+from types import ModuleType
 
 
-def from_pyfile(self, filename, silent=False):
+def zz_from_pyfile(config, filename, silent=False):
     """Override existing from_pyfile method to read py file in
     encoding 'UTF-8'.
     See: http://www.sdg32.com/flask-instance-folders/
@@ -20,7 +20,7 @@ def from_pyfile(self, filename, silent=False):
     .. versionadded:: 0.7
        `silent` parameter.
     """
-    filename = os.path.join(self.root_path, filename)
+    filename = os.path.join(config.root_path, filename)
     d = ModuleType('config')
     d.__file__ = filename
     try:
@@ -31,12 +31,6 @@ def from_pyfile(self, filename, silent=False):
             return False
         e.strerror = 'Unable to load configuration file (%s)' % e.strerror
         raise
-    self.from_object(d)
+
+    config.from_object(d)
     return True
-
-
-class Zigzag:
-
-    def __init__(self, flask_obj):
-        flask_obj.config.from_pyfile = MethodType(
-            from_pyfile, flask_obj.config)
