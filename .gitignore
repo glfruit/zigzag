@@ -1,3 +1,6 @@
 **/*.pyc
 instance/
-db_repository/
+.DS_Store
+*.db
+*.log
+*.sublime-workspace
