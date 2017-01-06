@@ -1,16 +1,29 @@
-{% extends "layout.html" %}
-
-{% block main %}
-  <div class="container">
-    <form action="" method="post" class="form-survey">
-      {{ form.hidden_tag() }}
-      <h2 class="form-survey-heading">{{ _('Survey') }}</h2>
-      <!--
+{% extends "layout.html" %} {% block main %}
+<div class="container">
+    <!--
       TODO: 加入验证错误信息提示
       -->
-      {{ form.title(class='input-block-level', placeholder = _('Title')) }}
-      {{ form.description(class='input-block-level', placeholder = _('Description')) }}
-      <button class="btn btn-primary" type="submit" value="{{ _('Save') }}" >{{ _('Create') }}</button>
+    <form action="{{ url_for('survey_create') }}" method="post">
+        {{ form.hidden_tag() }}
+        
+        <div class="form-group">
+            <label for="title">{{ _('Title') }}</label>
+            {{ form.title(id = "title", placeholder = _('Title'), class = "form-control") }}
+            <p>
+                {% for error in form.title.errors %}
+                <span style="color: red;">{{ error }}</span> {% endfor %}
+            </p>
+        </div>
+        <div class="form-group">
+            <label for="description">{{ _('Description') }}</label>
+            {{ form.description(id = "description", placeholder = _('Description'), class = "form-control") }}
+            <p>
+                {% for error in form.description.errors %}
+                <span style="color: red;">{{ error }}</span> {% endfor %}
+            </p>
+        </div>
+        <button class="btn btn-primary" type="submit" value="{{ _('Save') }}">{{ _('Create') }}</button>
     </form>
-  </div> <!-- /container -->
+</div>
+<!-- /container -->
 {% endblock %}

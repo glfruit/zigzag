@@ -1,8 +1,19 @@
 from zigzag import db
 
 
-class Survey(db.Model):
+class Entity(db.Model):
+    """
+        Define a common abstract entity
+    """
+    __abstract__ = True
+
     id = db.Column(db.Integer, primary_key=True)
+    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
+    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(
+    ), onupdate=db.func.current_timestamp())
+
+
+class Survey(Entity):
     title = db.Column(db.String(200), index=True, unique=True)
     description = db.Column(db.String(300), index=True)
     questions = db.relationship('Question', backref='survey', lazy='dynamic')
@@ -13,8 +24,7 @@ class Survey(db.Model):
 # TODO: 增加是否类型、单选类型和多选类型问题
 
 
-class Question(db.Model):
-    id = db.Column(db.Integer, primary_key=True)
+class Question(Entity):    
     title = db.Column(db.String(200), index=True, unique=True)
     survey_id = db.Column(db.Integer, db.ForeignKey('survey.id'))
     question_type = db.Column(db.String(30))

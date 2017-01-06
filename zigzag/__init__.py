@@ -9,8 +9,7 @@ from flask_babel import Babel
 from flask_bootstrap import Bootstrap
 from flask_debugtoolbar import DebugToolbarExtension
 
-# FIXME:
-# 根据http://www.cnblogs.com/txw1958/archive/2011/10/21/2220636.html重构日志初始化代码
+# FIXME: 根据http://www.cnblogs.com/txw1958/archive/2011/10/21/2220636.html重构日志初始化代码
 app = Flask(__name__, instance_relative_config=True)
 
 app.config.from_object('config')

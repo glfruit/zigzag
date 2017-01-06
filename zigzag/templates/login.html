@@ -4,11 +4,6 @@
   {{ _('Login') }}
 {% endblock %}
 
-{% block styles %}
-  {{ super() }}
-  <link href="{{url_for('static',filename='css/zigzag.css')}}" rel="stylesheet">
-{% endblock %}
-
 {% block main %}
   <div class="container">
     <form action="" method="post" class="form-signin">

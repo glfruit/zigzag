@@ -6,8 +6,9 @@ from flask_uploads import UploadSet
 
 from werkzeug import secure_filename
 
-from zigzag import app, babel
+from zigzag import app, db, babel
 from .forms import LoginForm, SurveyForm
+from .models import Survey
 
 swf_files = UploadSet('swfFiles')
 
@@ -18,6 +19,10 @@ def get_locale():
                     for translation in babel.list_translations()]
     return request.accept_languages.best_match(translations)
 
+#FIXME: 处理404错误时没有跳转到相应页面的问题
+@app.errorhandler(404)
+def not_found(error):
+    return render_template('404.html'), 404
 
 @app.route('/')
 def index():
@@ -47,16 +52,27 @@ def upload():
 @app.route('/survey/create', methods=['GET', 'POST'])
 def survey_create():
     form = SurveyForm()
-    if request.method == 'GET':
-        return render_template('survey/create.html', form=form)
 
     if form.validate_on_submit():
+        app.logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^valid survey data is acquired")
+        survey = Survey()
+        survey.title = request.form['title']
+        survey.description = request.form['description']
+        db.session.add(survey)
+        db.session.commit()
+        app.logger.info("^^^^^^^^^^^^^^^^^^^^^^^^^^^valid survey data is saved")
         return redirect(url_for('survey_list'))
+
+    if app.config['DEBUG']:
+        flash(form.errors, 'error')
+
+    return render_template('survey/create.html', form=form)
 
 
 @app.route('/survey/list', methods=['GET'])
 def survey_list():
-    return render_template('survey/list.html')
+    surveys = Survey.query.all()
+    return render_template('survey/list.html', surveys = surveys)
 
 
 # NOTE: 来自http://flask.pocoo.org/snippets/12/，实现用flash存储表单错误信息的功能

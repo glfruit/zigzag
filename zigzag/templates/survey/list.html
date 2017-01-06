@@ -2,4 +2,9 @@
 
 {% block content %}
   <h2>Survey List</h2>
+  <ul>
+  {% for survey in surveys %}
+	<li>{{ survey.title }}</li>
+  {% endfor %}
+  </ul>
 {% endblock %}
