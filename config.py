@@ -19,3 +19,10 @@ basedir = os.path.abspath(os.path.dirname(__file__))
 SQLALCHEMY_DATABASE_URI = 'sqlite:///' + os.path.join(basedir, 'app.db')
 SQLALCHEMY_MIGRATE_REPO = os.path.join(basedir, 'db_repository')
 SQLALCHEMY_TRACK_MODIFICATIONS = False
+
+# Application threads. A common general assumption is
+# using 2 per available processor cores - to handle
+# incoming requests using one and performing background
+# operations using the other.
+# see: https://www.digitalocean.com/community/tutorials/how-to-structure-large-flask-applications
+THREADS_PER_PAGE = 2

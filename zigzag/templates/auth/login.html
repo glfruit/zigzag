@@ -1,0 +1,20 @@
+{% extends "layout.html" %} 
+
+{% block title %}
+  {{ _('Login') }}
+{% endblock %}
+
+{% block main %}
+  <div class="container">
+    <form action="" method="post" class="form-signin">
+      {{ form.hidden_tag() }}
+      <h2 class="form-signin-heading">{{ _('Login') }}</h2>
+      <!--
+      TODO: 加入验证错误信息提示
+      -->
+      {{ form.username(class='input-block-level', placeholder = _('Username')) }}
+      {{ form.password(class='input-block-level', placeholder = _('Password')) }}
+      <button class="btn btn-primary" type="submit" value="{{ _('Login') }}" >{{ _('Login') }}</button>
+    </form>
+  </div> <!-- /container -->
+{% endblock %}

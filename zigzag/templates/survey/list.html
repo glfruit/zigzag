@@ -4,7 +4,7 @@
   <h2>Survey List</h2>
   <ul>
   {% for survey in surveys %}
-	<li><a href="{{ url_for('survey_show', survey_id=survey.id) }}">{{ survey.title }}</a></li>
+	<li><a href="{{ url_for('survey.survey_show', survey_id=survey.id) }}">{{ survey.title }}</a></li>
   {% endfor %}
   </ul>
 {% endblock %}
