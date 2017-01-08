@@ -11,7 +11,6 @@ from .forms import LoginForm
 
 mod_auth = Blueprint("auth", __name__, url_prefix="/auth")
 
-
 @mod_auth.route('/login', methods = ['GET', 'POST'])
 def login():
     form = LoginForm()

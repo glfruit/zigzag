@@ -2,7 +2,7 @@
 import logging
 from logging.handlers import TimedRotatingFileHandler
 
-from flask import Flask, render_template
+from flask import Flask, request, render_template
 
 from flask_sqlalchemy import SQLAlchemy
 from flask_babel import Babel
@@ -41,6 +41,11 @@ db = SQLAlchemy(app)
 
 # i18n
 babel = Babel(app)
+@babel.localeselector
+def get_locale():
+    translations = [str(translation)
+                    for translation in babel.list_translations()]
+    return request.accept_languages.best_match(translations)
 
 # flask-bootstrap config
 Bootstrap(app)
@@ -49,6 +54,8 @@ Bootstrap(app)
 # register blueprints
 from zigzag.mod_auth.controllers import mod_auth as auth_module
 from zigzag.mod_survey.controllers import mod_survey as survey_module
+from zigzag.mod_home.controllers import mod_home as home_module
 
+app.register_blueprint(home_module)
 app.register_blueprint(auth_module)
 app.register_blueprint(survey_module)

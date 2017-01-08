@@ -15,9 +15,8 @@ from .forms import SurveyForm
 
 mod_survey = Blueprint("survey", __name__, url_prefix="/survey")
 
-
 @mod_survey.route('/')
-def index():
+def survey_index():
     return redirect(url_for('survey.survey_list'))
 
 
@@ -44,7 +43,18 @@ def survey_list():
     return render_template('survey/list.html', surveys=surveys)
 
 
-@mod_survey.route('/<survey_id>', methods=['GET'])
+@mod_survey.route('/<int:survey_id>', methods=['GET'])
 def survey_show(survey_id):
     survey = Survey.query.get(survey_id)  # FIXME:处理id不存在的情况
     return render_template('survey/show.html', survey=survey)
+
+# NOTE: 来自http://flask.pocoo.org/snippets/12/，实现用flash存储表单错误信息的功能
+
+
+def flash_errors(form):
+    for field, errors in form.errors.items():
+        for error in errors:
+            flash(u"Error in the %s field - %s" % (
+                getattr(form, field).label.text,
+                error
+            ))
